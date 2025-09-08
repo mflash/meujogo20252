@@ -1,0 +1,91 @@
+[gd_scene load_steps=11 format=3 uid="uid://dutthruywurwf"]
+
+[ext_resource type="PackedScene" uid="uid://4fgxs6t653qu" path="res://player.tscn" id="1_e2o6t"]
+[ext_resource type="Texture2D" uid="uid://bdwekxnn3m2ah" path="res://bricks/Stonewall_Texture.png" id="3_feb5d"]
+[ext_resource type="Texture2D" uid="uid://elat85u2peut" path="res://bricks/Bluerock_Texture.jpg" id="4_fc0e3"]
+[ext_resource type="Texture2D" uid="uid://cwn2ov1vq65db" path="res://bricks/Stones_Texture.png" id="5_7jktm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e2o6t"]
+size = Vector2(36, 61)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_feb5d"]
+size = Vector2(166, 156)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fc0e3"]
+size = Vector2(56, 369)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7jktm"]
+friction = 0.75
+rough = true
+bounce = 0.76
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7jktm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ryrav"]
+size = Vector2(836, 40)
+
+[node name="Game" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_e2o6t")]
+position = Vector2(592, 331)
+metadata/_edit_group_ = true
+
+[node name="PlayerSprite" parent="Player" index="0"]
+animation = &"down"
+
+[node name="CollisionShape2D" parent="Player" index="1"]
+visible = false
+position = Vector2(-1, 1.5)
+shape = SubResource("RectangleShape2D_e2o6t")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(843, 320)
+shape = SubResource("RectangleShape2D_feb5d")
+metadata/_edit_group_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(398, 308)
+metadata/_edit_group_ = true
+
+[node name="StonewallTexture" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(-0.499996, 0.500032)
+scale = Vector2(0.207031, 1.43359)
+texture = ExtResource("3_feb5d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_fc0e3")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(641, 93)
+mass = 10.0
+physics_material_override = SubResource("PhysicsMaterial_7jktm")
+metadata/_edit_group_ = true
+
+[node name="BluerockTexture" type="Sprite2D" parent="RigidBody2D"]
+position = Vector2(-4.15742e-05, 1.37091e-06)
+scale = Vector2(0.078125, 0.078125)
+texture = ExtResource("4_fc0e3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+visible = false
+shape = SubResource("RectangleShape2D_7jktm")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(671, 594)
+rotation = -0.301942
+metadata/_edit_group_ = true
+
+[node name="StonesTexture" type="Sprite2D" parent="StaticBody2D2"]
+position = Vector2(-12.5, -8)
+scale = Vector2(3.26953, 0.164062)
+texture = ExtResource("5_7jktm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(-12, -9)
+shape = SubResource("RectangleShape2D_ryrav")
+
+[connection signal="body_entered" from="Area2D" to="Player" method="_on_area_2d_body_entered"]
+
+[editable path="Player"]
