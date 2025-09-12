@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://dutthruywurwf"]
 
-[ext_resource type="PackedScene" uid="uid://4fgxs6t653qu" path="res://player.tscn" id="1_e2o6t"]
-[ext_resource type="Texture2D" uid="uid://bdwekxnn3m2ah" path="res://bricks/Stonewall_Texture.png" id="3_feb5d"]
-[ext_resource type="Texture2D" uid="uid://elat85u2peut" path="res://bricks/Bluerock_Texture.jpg" id="4_fc0e3"]
-[ext_resource type="Texture2D" uid="uid://cwn2ov1vq65db" path="res://bricks/Stones_Texture.png" id="5_7jktm"]
+[ext_resource type="PackedScene" uid="uid://4fgxs6t653qu" path="res://scenes/player.tscn" id="1_lbhrr"]
+[ext_resource type="Texture2D" uid="uid://bdwekxnn3m2ah" path="res://bricks/Stonewall_Texture.png" id="2_iywne"]
+[ext_resource type="Texture2D" uid="uid://elat85u2peut" path="res://bricks/Bluerock_Texture.jpg" id="3_p57ef"]
+[ext_resource type="Texture2D" uid="uid://cwn2ov1vq65db" path="res://bricks/Stones_Texture.png" id="4_u5sy4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e2o6t"]
 size = Vector2(36, 61)
@@ -26,7 +26,7 @@ size = Vector2(836, 40)
 
 [node name="Game" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_e2o6t")]
+[node name="Player" parent="." instance=ExtResource("1_lbhrr")]
 position = Vector2(592, 331)
 metadata/_edit_group_ = true
 
@@ -52,7 +52,7 @@ metadata/_edit_group_ = true
 [node name="StonewallTexture" type="Sprite2D" parent="StaticBody2D"]
 position = Vector2(-0.499996, 0.500032)
 scale = Vector2(0.207031, 1.43359)
-texture = ExtResource("3_feb5d")
+texture = ExtResource("2_iywne")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_fc0e3")
@@ -66,7 +66,7 @@ metadata/_edit_group_ = true
 [node name="BluerockTexture" type="Sprite2D" parent="RigidBody2D"]
 position = Vector2(-4.15742e-05, 1.37091e-06)
 scale = Vector2(0.078125, 0.078125)
-texture = ExtResource("4_fc0e3")
+texture = ExtResource("3_p57ef")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 visible = false
@@ -80,7 +80,7 @@ metadata/_edit_group_ = true
 [node name="StonesTexture" type="Sprite2D" parent="StaticBody2D2"]
 position = Vector2(-12.5, -8)
 scale = Vector2(3.26953, 0.164062)
-texture = ExtResource("5_7jktm")
+texture = ExtResource("4_u5sy4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 position = Vector2(-12, -9)

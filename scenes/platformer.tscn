@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://d1rgl3edfcfsw"]
+[gd_scene load_steps=9 format=3 uid="uid://d1rgl3edfcfsw"]
 
-[ext_resource type="PackedScene" uid="uid://4fgxs6t653qu" path="res://player.tscn" id="1_cmw8w"]
-[ext_resource type="Script" uid="uid://dibjrpmcas5go" path="res://player_platformer.gd" id="2_k1ntv"]
+[ext_resource type="PackedScene" uid="uid://4fgxs6t653qu" path="res://scenes/player.tscn" id="1_cmw8w"]
+[ext_resource type="Script" uid="uid://dibjrpmcas5go" path="res://scenes/player_platformer.gd" id="2_k1ntv"]
 [ext_resource type="Texture2D" uid="uid://btcvtyrfqxowx" path="res://bricks/Brickwall4_Texture.png" id="2_or1io"]
+[ext_resource type="PackedScene" uid="uid://dxxiay6e6ls1j" path="res://objects/box.tscn" id="3_qcnyv"]
+[ext_resource type="FontFile" uid="uid://ddpsqcmwkirnv" path="res://fonts/Xolonium-Regular.ttf" id="4_ftcjt"]
+[ext_resource type="Script" uid="uid://ct38vosvehfj1" path="res://scenes/hud.gd" id="4_gk7h0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k1ntv"]
 size = Vector2(352, 33)
@@ -18,8 +21,18 @@ script = ExtResource("2_k1ntv")
 speed = 300.0
 jump_speed = -1000.0
 gravity = 2500.0
+box = ExtResource("3_qcnyv")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="CollisionShape2D" parent="Player" index="1"]
+visible = false
+
+[node name="Camera2D" parent="Player" index="2"]
+position_smoothing_speed = 1.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+editor_draw_drag_margin = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["HUD"]]
 position = Vector2(425, 516)
 metadata/_edit_group_ = true
 
@@ -29,6 +42,7 @@ scale = Vector2(1.36719, 0.125)
 texture = ExtResource("2_or1io")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+visible = false
 shape = SubResource("RectangleShape2D_k1ntv")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
@@ -41,10 +55,11 @@ scale = Vector2(1.36719, 0.125)
 texture = ExtResource("2_or1io")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+visible = false
 shape = SubResource("RectangleShape2D_k1ntv")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
-position = Vector2(398, 187)
+position = Vector2(464, 218)
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D3"]
@@ -53,6 +68,7 @@ scale = Vector2(1.36719, 0.125)
 texture = ExtResource("2_or1io")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+visible = false
 shape = SubResource("RectangleShape2D_k1ntv")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
@@ -65,7 +81,22 @@ scale = Vector2(0.859375, 0.125)
 texture = ExtResource("2_or1io")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+visible = false
 position = Vector2(66.5, 0)
 shape = SubResource("RectangleShape2D_ftcjt")
+
+[node name="HUD" type="CanvasLayer" parent="." groups=["HUD"]]
+script = ExtResource("4_gk7h0")
+
+[node name="Score" type="Label" parent="HUD"]
+offset_left = 26.0
+offset_top = 32.0
+offset_right = 246.0
+offset_bottom = 93.0
+theme_override_fonts/font = ExtResource("4_ftcjt")
+theme_override_font_sizes/font_size = 50
+text = "Score: ???"
+
+[connection signal="jumped" from="Player" to="HUD" method="_on_player_jumped"]
 
 [editable path="Player"]

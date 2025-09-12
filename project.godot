@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="meujogo20252"
-run/main_scene="uid://dutthruywurwf"
+run/main_scene="uid://d1rgl3edfcfsw"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/stretch/mode="viewport"
 
 [input]
 

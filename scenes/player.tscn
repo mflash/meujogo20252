@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=3 uid="uid://4fgxs6t653qu"]
 
-[ext_resource type="Texture2D" uid="uid://ca61ayifle2vr" path="res://char.png" id="1_4flbx"]
-[ext_resource type="Script" uid="uid://cq84uvhfo46g8" path="res://player.gd" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://ca61ayifle2vr" path="res://textures/char.png" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://cq84uvhfo46g8" path="res://scenes/player.gd" id="1_onrkg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_onrkg"]
 atlas = ExtResource("1_4flbx")
@@ -151,3 +151,5 @@ animation = &"up"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.5, 0.5)
 shape = SubResource("RectangleShape2D_onrkg")
+
+[node name="Camera2D" type="Camera2D" parent="."]
