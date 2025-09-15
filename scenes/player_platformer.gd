@@ -35,11 +35,11 @@ func get_side_input():
 	velocity.x = vel * speed
 
 func move_side(delta):
-	print(velocity.y)
+	#print(velocity.y)
 	velocity.y += gravity * delta
 	get_side_input()
 	animate_side()
-	move_and_slide()
+	move_and_slide()	
 
 func _physics_process(delta):
 #   move_8way(delta)

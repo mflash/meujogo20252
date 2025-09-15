@@ -1,16 +1,105 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxxiay6e6ls1j"]
+[gd_scene load_steps=7 format=3 uid="uid://dxxiay6e6ls1j"]
 
 [ext_resource type="Texture2D" uid="uid://d27g14ql5mwy7" path="res://icon.svg" id="1_3inec"]
+[ext_resource type="Script" uid="uid://2b36t6evyvu3" path="res://objects/box.gd" id="1_bctmu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oq5cr"]
 size = Vector2(64, 64)
 
+[sub_resource type="Animation" id="Animation_bctmu"]
+resource_name = "scale"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"apareceu"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_d7q48"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_10rvk"]
+_data = {
+&"RESET": SubResource("Animation_d7q48"),
+&"scale": SubResource("Animation_bctmu")
+}
+
 [node name="Box" type="Area2D"]
+script = ExtResource("1_bctmu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visibility_layer = 16385
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_3inec")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("RectangleShape2D_oq5cr")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_10rvk")
+}
+autoplay = "scale"
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
