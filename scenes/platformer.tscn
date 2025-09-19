@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1rgl3edfcfsw"]
+[gd_scene load_steps=6 format=3 uid="uid://d1rgl3edfcfsw"]
 
 [ext_resource type="Script" uid="uid://b7vyy0eynwdle" path="res://scenes/game.gd" id="1_v4035"]
 [ext_resource type="FontFile" uid="uid://ddpsqcmwkirnv" path="res://fonts/Xolonium-Regular.ttf" id="4_ftcjt"]
 [ext_resource type="Script" uid="uid://ct38vosvehfj1" path="res://scenes/hud.gd" id="4_gk7h0"]
 [ext_resource type="PackedScene" uid="uid://dg0tq82cwyxwe" path="res://scenes/level1.tscn" id="4_nd818"]
+[ext_resource type="AudioStream" uid="uid://c8cx1jhoclu5d" path="res://SFX/Summer_Park.ogg" id="5_xlal6"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_v4035")
@@ -19,6 +20,13 @@ offset_bottom = 93.0
 theme_override_fonts/font = ExtResource("4_ftcjt")
 theme_override_font_sizes/font_size = 50
 text = "Score: ???"
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(1223, 266)
+stream = ExtResource("5_xlal6")
+autoplay = true
+max_distance = 737.0
+bus = &"Music"
 
 [node name="Level" parent="." instance=ExtResource("4_nd818")]
 

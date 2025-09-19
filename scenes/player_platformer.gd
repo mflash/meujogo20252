@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var jump_speed := -1000.0
 @export var gravity := 2500.0
 @export var box : PackedScene
+@onready var jump_sound := $Jump
 
 @onready var sprite := $PlayerSprite
 #@onready var box := preload("res://objects/box.tscn")
@@ -31,6 +32,18 @@ func get_side_input():
 		var b := box.instantiate()
 		b.position = global_position
 		owner.add_child(b)
+		# Emite o som de pulo
+		#if not jump_sound.playing:
+		jump_sound.play()
+		
+	if Input.is_action_just_pressed("filter"):
+		print("Ativa/desativa filtro de áudio")
+		print(AudioServer.get_bus_name(1))
+		var filtro : AudioEffectLowPassFilter = AudioServer.get_bus_effect(1, 0)		
+		if filtro.cutoff_hz == 2000:
+			filtro.cutoff_hz = 200
+		else:
+			filtro.cutoff_hz = 2000
 		
 	velocity.x = vel * speed
 
